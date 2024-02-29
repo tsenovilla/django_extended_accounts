@@ -23,7 +23,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         
-    - name: Run migrations ## Migraciones para tener la BBDD como necesita la app.
+    - name: Run migrations
       run: |
         python manage.py makemigrations
         python manage.py migrate
