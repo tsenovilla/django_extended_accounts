@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Account
+{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for account in object_list %}
+            <li><a href="{% url 'extended_accounts:detail_account' username=account.username %}">{{ account.username }}</a></li>
+        {% endfor %}
+    </ul>
+
+    
+{% endblock %}

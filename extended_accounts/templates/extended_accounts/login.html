@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Inicio de sesión
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>Login</button>
+    </form>
+    <a href="{% url 'extended_accounts:new_account' %}">Not registered yet? Create an account</a>
+    <a href="{% url 'extended_accounts:reset_password_request' %}">Did you forget your password?</a>
+{% endblock %}

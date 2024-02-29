@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delete account
+{% endblock title %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <button>Delete account</button>
+    </form>
+{% endblock content %}

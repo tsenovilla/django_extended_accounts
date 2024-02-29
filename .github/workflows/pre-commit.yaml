@@ -1,0 +1,50 @@
+name: Pre-commit
+
+on: [push, pull_request]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          python-version: ["3.11"]
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v3
+
+    ## Setup Python, dependencies and migrations, pre-commit needs them
+    - name: Setup Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run migrations 
+      run: |
+        python manage.py makemigrations
+        python manage.py migrate
+
+    - name: Check linter
+      run: |
+        black --check .
+
+    - name: Check coverage
+      run: |
+        if [ ! -e coverage/.coverage ] || [ ! -e coverage/coverage.svg ]; then
+            echo "Have you run pre-commit?"
+            exit 1
+        else
+            echo "coverage found" 
+        fi
+        coverage run --data-file=coverage/.coverage-CI manage.py test
+        coverage report > coverage.txt
+        coverage report --data-file=coverage/.coverage-CI > coverage-CI.txt
+        diff coverage.txt coverage-CI.txt
+        coverage-badge -f -o coverage/coverage-CI.svg
+        diff coverage/coverage.svg coverage/coverage-CI.svg
+        echo "Pre-commit correct"

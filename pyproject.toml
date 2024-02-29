@@ -1,0 +1,21 @@
+[project]
+name = "django_extended_accounts"
+version = "1.0.0"
+authors = [
+    { name = "Tomas Senovilla Polo", email = "tspscgs@gmail.com" }
+]
+description="A Django app that may serve as a template for extending the Django's default User model into a more realistic accounts system"
+readme = "README.md"
+classifiers = ['Programming Language :: Python :: 3', 'License :: OSI Approved :: MIT License', 'Operating System :: OS Independent', 'Framework :: Django']
+requires-python = "^3.11"
+
+[tool.coverage.run]
+relative_files = true
+omit = [
+    "manage.py",
+    "__init__.py",
+    "*/migrations/*",
+    "django_extended_accounts/*",
+    "urls.py"
+]
+data_file = "coverage/.coverage"

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Account
+{% endblock %}
+
+{% block content %}
+    <ul>
+        <li><p>Username: {{ object.username }}</p></li>
+        <li><p>First_name: {{ object.profile.first_name }}</p></li>
+        <li><p>Last_name: {{ object.profile.last_name }}</p></li>
+        <li><p>E-mail: {{ object.email }}</p></li>
+        <li><p>Phone_number: {{ object.profile.phone_number }}</p></li>
+    </ul>
+    {% if object.profile.profile_image %}
+        <picture>
+            <source srcset="{{ object.profile.profile_image.url }}.webp" type="image/webp">
+            <img src="{{ object.profile.profile_image.url }}.png" alt="image" loading="lazy">
+        </picture>
+    {% endif %}
+    
+{% endblock %}
