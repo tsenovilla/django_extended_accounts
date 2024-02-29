@@ -5,7 +5,7 @@
 
 # Description 📖📚
 
-**django_extended_accounts** is a Django app designed to extend the Django's default authentication system. As this is a common task, this project aims to be a reusable template to help developers saving a lot of time. 
+**django_extended_accounts** is a Django project containing an app (**extended_accounts**) designed to extend the Django's default authentication system. As this is a common task, this project aims to be a reusable template to help developers saving a lot of time. 
 
 This solution is based on getting rid of the Django's User model to use a custom model called AccountModel. This model is designed to only contain authentication-related information, while all personal data resides in another model called ProfileModel, which maintains a one-to-one relationship with AccountModel. The AccountModel provided is similar to the default User model in Django, with some differences:
 
