@@ -110,6 +110,7 @@ class AccountModelTestCase(TestCase):
         admin_user = Account.objects.create_superuser(**data)
         self.assertTrue(admin_user.is_staff)
         self.assertTrue(admin_user.is_superuser)
+        self.assertTrue(admin_user.is_active)
 
     def test_create_superuser_KO_if_is_staff_manually_set_to_False_KO(self):
         data = self.__modify_data(
@@ -124,6 +125,13 @@ class AccountModelTestCase(TestCase):
         )
         with self.assertRaises(ValueError):
             Account.objects.create_superuser(is_superuser=False, **data)
+
+    def test_create_superuser_KO_if_is_active_manually_set_to_False_KO(self):
+        data = self.__modify_data(
+            {"username": "jdoe", "phone_number": 987654321, "email": "jdoe@mail.com"}
+        )
+        with self.assertRaises(ValueError):
+            Account.objects.create_superuser(is_active=False, **data)
 
     ## UPDATE TESTS
 
